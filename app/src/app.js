@@ -15,7 +15,6 @@ for (var i = 0; i < 5; i++) {
     });
 }
 
-
 WinJS.Namespace.define("Sample.ListView", {
     modes: {
         single: {
@@ -53,4 +52,4 @@ setTimeout(function(){
      $('.smallListIconTextItem').on('click', function(){
         vegetal.add_vegetal(this.children[0].src)
     })
-     }, 1200)
+ }, 2000)

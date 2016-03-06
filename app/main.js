@@ -49,3 +49,56 @@ app.on('activate', function () {
     createWindow();
   }
 });
+
+var express = require('express');
+var bodyParser = require('body-parser')
+var apps = express();
+// parse application/x-www-form-urlencoded 
+apps.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json 
+apps.use(bodyParser.json())
+
+var serialport = require('serialport');// include the library
+var SerialPort = serialport.SerialPort; // make a local instance of it
+
+apps.post('/', function (req, res) {
+    
+    console.log(req.body);
+    return res.send('Enviando!');
+    //return 12;
+    var  portName = "COM6";
+
+    var myPort = new SerialPort(portName, {
+        baudRate: 9600,
+        // look for return and newline at the end of each data packet:
+        parser: serialport.parsers.readline("\n")
+    });
+
+    myPort.on('open', showPortOpen);
+    myPort.on('data', sendSerialData);
+    myPort.on('close', showPortClose);
+    myPort.on('error', showError);
+    function showPortOpen() {
+        console.log('port open. Data rate: ' + myPort.options.baudRate);
+        // #xBee , humedad, temperatura
+        sendSerialData("2, 38, 18");
+    }
+    function sendSerialData(data) {
+        console.log(data);
+        myPort.write(data);
+    }
+
+
+    function showPortClose() {
+        console.log('port closed.');
+    }
+    
+    function showError(error) {
+        console.log('Serial port error: ' + error);
+    }
+    res.send('Enviando!');
+});
+
+apps.listen(3000, function () {
+  console.log('Example app listening on port 3000!');
+});

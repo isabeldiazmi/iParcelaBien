@@ -88,12 +88,16 @@
             itemDataSource: Sample.ListView.data.dataSource,
             itemTemplate: select('.smallListIconTextTemplate'),
             selectionMode: 'none',
-            tapBehavior: 'none',
+            tapBehavior: 'toggleSelect',
             layout: { type: WinJS.UI.ListLayout }
     }">
 </div>
 </div>
 <script src="assets/js/remodal.min.js"></script>
     <script src="assets/js/app.js"></script>
+    <script>
+  const remote = require('electron').remote;
+  console.log(remote.app.getVersion());
+</script>
 </body>
 </html>
