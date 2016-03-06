@@ -12,6 +12,8 @@ int id_Verdura;
  * perfectas de temperatura, presión y humedad.
 */
 long tiempo_Actual;
+long tiempo_Aux;
+long tiempo_Total = millis();
 //Variable que identifica si se está plantando un nuevo tipo de verdura.
 bool primera_Configuracion;
 //Variable que cuenta las veces que se ha pospuesto el riego por las condiciones de clima.
@@ -22,6 +24,8 @@ int parametro_Temperatura;
 int parametro_Presion;
 //Variable que cuenta el tiempo que puede pasar una verdura sin ser regada.
 int tiempo_Minimo;
+//Variable que cuenta el número de veces que se ha ejecutado el programa.
+int iteraciones = 1;
 
 void setup() {
   //Lecturas de los sensores.
@@ -71,11 +75,12 @@ void loop() {
     }
   }
   else{
-    tiempo_Actual = millis();
-    if(tiempo_Actual = tiempo_Minimo){
+    tiempo_Aux = millis() -  tiempo_Total;
+    if(tiempo_Aux >= tiempo_Minimo){
       digitalWrite(sistema_Riego, HIGH);
       delay(1000);
       digitalWrite(sistema_Riego, LOW);
+      tiempo_Total = millis();
     }
   }
 }
