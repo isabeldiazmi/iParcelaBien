@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Parcela.io</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/winjs/4.4.0/css/ui-light.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="assets/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <script>window.$ = window.jQuery = require('./node_modules/jquery/dist/jquery.js');</script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/remodal.css">
+<link rel="stylesheet" href="assets/css/remodal-default-theme.css">
+</head>
+<body>
+    <div id="app" class="large">
+        <div class="splitView" data-win-control="WinJS.UI.SplitView" data-win-options="{
+                openedDisplayMode: 'inline',
+                closedDisplayMode: 'inline'
+            }">
+            <!-- Pane area -->
+            <div>
+                <div class="header">
+                    <button
+                        class="win-splitviewpanetoggle"
+                        data-win-control="WinJS.UI.SplitViewPaneToggle"
+                        data-win-options="{ splitView: select('.splitView') }"
+                    ></button>
+                    <div class="title">Parcela.io</div>
+                </div>
+
+                <div class="nav-commands">
+                    <div data-win-control="WinJS.UI.SplitViewCommand" data-win-options="{ label: 'Home', icon: 'home'}"></div>
+                </div>
+            </div>
+
+            <!-- Content area -->
+            <button
+                class="win-splitviewpanetoggle"
+                data-win-control="WinJS.UI.SplitViewPaneToggle"
+                data-win-options="{ splitView: select('.splitView') }"
+            ></button>
+            <div class="contenttext">
+                <div class="container">
+                    <div class="item-flex" style="flex:5%;background: rgba(255,255,255,0.8);">
+                        <strong>Temperatura: 23°</strong>
+                        <br>
+                        <strong>Presion: Alta</strong>
+                        <strong></strong>
+                    </div>
+                    <div class="item-flex" style="background:rgba(0,0,0,0.7);">
+                        <ul id="parcelas" style="list-style: none;">
+                            <li>
+                                <a id="btnAddVegetal" href="#modal" style="font-size: 52px;">
+                                    <i class="fa fa-plus-circle"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+    <div data-remodal-id="modal">
+  <button data-remodal-action="close" class="remodal-close"></button>
+  <!-- Simple template for the ListView instantiation  -->
+<div class="smallListIconTextTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
+    <a class="smallListIconTextItem">
+        <img src="#" class="smallListIconTextItem-Image" data-win-bind="src: picture" />
+        <div class="smallListIconTextItem-Detail">
+            <h4 class="win-h4" data-win-bind="textContent: title"></h4>
+            <h6 class="win-h6" data-win-bind="textContent: text"></h6>
+        </div>
+    </a>
+</div>
+
+<!-- The declarative markup necesary for ListView instantiation -->
+<!-- Call WinJS.UI.processAll() in your initialization code -->
+<div id="listView"
+     class="win-selectionstylefilled"
+     data-win-control="WinJS.UI.ListView"
+     data-win-options="{
+            itemDataSource: Sample.ListView.data.dataSource,
+            itemTemplate: select('.smallListIconTextTemplate'),
+            selectionMode: 'none',
+            tapBehavior: 'none',
+            layout: { type: WinJS.UI.ListLayout }
+    }">
+</div>
+</div>
+<script src="assets/js/remodal.min.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
